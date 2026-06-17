@@ -1,6 +1,0 @@
-V116 patch report
-- Kept V115 Home help alignment improvements.
-- Re-hidden Videos guided path internal fields: Video type and Lecture. Visible fields are Course + Chapter only.
-- Re-hidden QBank guided path internal fields: Library and Lecture. Visible fields are MCQ mode + Course + Chapter only.
-- Kept internal selects in DOM for compatibility with existing JavaScript/localStorage, but they are not visible to users.
-- Updated cache/version tags to V116.

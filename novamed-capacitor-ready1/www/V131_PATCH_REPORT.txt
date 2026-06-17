@@ -1,7 +1,0 @@
-NovaMed v131 patch report
-
-- Matched the Free Courses CTA to the Wizary mode gold style in dark mode.
-- Moved the Free Courses CTA to the upper-right of the Videos hero on desktop.
-- Reduced the gold shadow/glow on Wizary mode and Free Courses buttons for a smoother look.
-- Softened the lower shadow of the Streak / League card in dark and light modes to avoid a solid rectangular block.
-- Updated asset cache/version strings to v131 so changes appear after deployment.

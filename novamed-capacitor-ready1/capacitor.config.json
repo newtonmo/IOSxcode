@@ -1,8 +1,0 @@
-{
-  "appId": "com.novamed.app",
-  "appName": "NovaMed",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
-}

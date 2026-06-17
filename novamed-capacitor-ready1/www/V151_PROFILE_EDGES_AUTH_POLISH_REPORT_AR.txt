@@ -1,7 +1,0 @@
-V151 - Profile edges + account content polish
-
-- تم تنعيم حواف وظلال نوافذ Profile workspace الخاصة بـ My Mistakes / Analytics / Flashcards / Bookmarks.
-- تم تقليل الخطوط المستقيمة الظاهرة على أطراف الهيدر والكروت عبر border=0 + outline ناعم + shadows/radial gradients.
-- تم تحسين نافذة Profile account وتبسيط محتواها بدون تغيير أي منطق تسجيل الدخول أو Supabase.
-- تم حذف/استبدال كلمات Student account / Email account / Sign up / OTP من واجهة الطالب قدر الإمكان مع الحفاظ على نفس الأزرار والدوال.
-- التعديل تصميمي ونصي فقط؛ لا يوجد تغيير في الجداول أو RLS أو localStorage أو منطق التطبيق.

@@ -1,9 +1,0 @@
-V107 patch report
-
-Changes:
-- Limited the Live Exam banner to Home and QBank only.
-- Removed Live Exam banner rendering from Videos and all non-Home/QBank screens.
-- Added cleanup logic so old cached banners on Videos are removed the next time renderLiveExamIndicators runs.
-- Updated cache-busting/service-worker version to V107.
-
-No changes were made to exam scoring, localStorage keys, Supabase tables, QBank JSON format, or video/free-courses logic.

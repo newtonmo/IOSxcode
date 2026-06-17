@@ -1,7 +1,0 @@
-V115 patch:
-- Aligned ? help buttons beside the exact Home/Guide label or title.
-- Kept Open/action buttons on the opposite side.
-- Restored Continue where you left off and Daily MCQ headings.
-- Added Monthly Calendar help button at top-right.
-- Kept Videos search row hidden.
-- Updated cache/service worker to V115.

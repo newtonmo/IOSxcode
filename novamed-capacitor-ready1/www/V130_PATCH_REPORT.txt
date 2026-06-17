@@ -1,9 +1,0 @@
-NovaMed v130 — Final Button & Shadow Polish
-
-Design-only changes. No app logic, Supabase, localStorage, navigation, tables, data, or feature behavior changed.
-
-Updated:
-1. Free Courses CTA is now a compact gold pill aligned like Wizary mode instead of a wide empty bar.
-2. Streak/League light-mode card shadow reduced roughly 50% and softened to remove the rectangular bottom-shadow feeling.
-3. To-Do Open tasks button now matches the Course Planner Open button style in Light Mode.
-4. Cache/version strings updated to v130 so Netlify/PWA users see the new CSS after deploy.
