@@ -28,26 +28,60 @@ workflows:
           ls -la ios || true
           echo "iOS App folder:"
           ls -la ios/App || true
+          echo "Search Xcode files:"
+          find ios -maxdepth 4 -name "*.xcworkspace" -o -name "*.xcodeproj"
+
+      - name: Install CocoaPods if available
+        script: |
+          cd ios/App
+          if [ -f "Podfile" ]; then
+            pod install --repo-update || true
+          fi
+          ls -la
 
       - name: Build iOS Simulator App
         script: |
           cd ios/App
-          xcodebuild \
-            -workspace App.xcworkspace \
-            -scheme App \
-            -configuration Debug \
-            -sdk iphonesimulator \
-            -derivedDataPath ../../build/ios \
-            CODE_SIGNING_ALLOWED=NO \
-            build
+
+          if [ -f "App.xcworkspace" ]; then
+            echo "Building using App.xcworkspace"
+            xcodebuild \
+              -workspace App.xcworkspace \
+              -scheme App \
+              -configuration Debug \
+              -sdk iphonesimulator \
+              -derivedDataPath ../../build/ios \
+              CODE_SIGNING_ALLOWED=NO \
+              build
+
+          elif [ -d "App.xcodeproj" ]; then
+            echo "Building using App.xcodeproj"
+            xcodebuild \
+              -project App.xcodeproj \
+              -scheme App \
+              -configuration Debug \
+              -sdk iphonesimulator \
+              -derivedDataPath ../../build/ios \
+              CODE_SIGNING_ALLOWED=NO \
+              build
+
+          else
+            echo "No App.xcworkspace or App.xcodeproj found"
+            ls -la
+            exit 1
+          fi
 
       - name: Zip simulator app
         script: |
-          APP_PATH=$(find ios/build/ios/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
-          if [ -z "$APP_PATH" ]; then
-            APP_PATH=$(find ios/App/../../build/ios/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
-          fi
+          APP_PATH=$(find build/ios/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
           echo "APP_PATH=$APP_PATH"
+
+          if [ -z "$APP_PATH" ]; then
+            echo "No .app file found"
+            find build -type d || true
+            exit 1
+          fi
+
           zip -r NovaMed-iOS-Simulator.app.zip "$APP_PATH"
 
     artifacts:
