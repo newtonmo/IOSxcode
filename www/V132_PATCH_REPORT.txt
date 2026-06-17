@@ -1,0 +1,8 @@
+NovaMed v132 patch report
+
+- Applied the same light-mode gold pill design to Wizary mode in dark mode too.
+- Applied the same gold pill design to Free Courses in both light and dark modes.
+- Applied the same gold style to the QBank MCQ mode picker (Traditional / Wizary style) in both themes.
+- Fixed the light-mode NovaMed app badge/logo by rendering the mark dark so it is visible.
+- Updated cache/version strings to v132.
+- No JavaScript logic, Supabase, localStorage, data, navigation, or features were changed.

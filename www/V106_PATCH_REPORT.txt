@@ -1,0 +1,18 @@
+V106 patch report
+
+1. Fixed modal scrolling for QBank tutor mode and live exam mode.
+   - Locks background scroll while a modal is open.
+   - Forces the modal card to be the scroll container.
+   - Adds a wheel-scroll bridge so mouse wheel/touchpad scrolling works even over answer buttons and explanation panels.
+   - Keeps mobile/touch scrolling enabled with touch-action: pan-y and -webkit-overflow-scrolling.
+
+2. Renamed QBank MCQ mode labels.
+   - Exam style -> Wizardry style.
+   - Free questions -> Traditional.
+   - The internal values stay the same, so old saved state and localStorage remain compatible.
+
+3. Updated service worker/cache version to V106 so browsers do not keep the old CSS/JS.
+
+Validation:
+- node --check passed for all JavaScript files.
+- No data schema, Supabase table, or localStorage key was renamed.

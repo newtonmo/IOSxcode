@@ -1,0 +1,39 @@
+NovaMed v135 Phase 2A - Cloud-only live exams + smart study plans
+
+Changes applied:
+1. Live timed exam no longer reads/writes localStorage key novamed-live-timed-exam-v1.
+   - Runtime cache: window.__novamedLiveExamCache only.
+   - Cloud table: public.live_exams.
+   - Active exam is restored after Supabase Auth session restoration.
+   - Clearing/finishing an exam marks the active row as completed.
+
+2. Smart Study Plan no longer reads/writes localStorage keys beginning with novamed-smart-study-plan-v85.
+   - Runtime cache: window.__novamedSmartStudyPlanCache only.
+   - Cloud table: public.study_plans.
+   - The latest active study plan is restored after sign-in/session restoration.
+   - Resetting the plan marks the active row inactive.
+
+3. Added Phase 2A cleanup:
+   - Removes old local live exam and study plan keys without touching Supabase Auth session.
+
+4. Updated cache-busting version:
+   - v135-phase2a-cloud-live-study
+   - Service worker cache updated to novamed-mobile-v135-phase2a-cloud-live-study.
+
+Tables required and already created in your project:
+- live_exams
+- study_plans
+- student_state
+- student_public
+- profiles
+
+Still intentionally left for later phases:
+- video_progress
+- qbank_attempts
+- question_mistakes
+- flashcard_progress
+- student_notes
+- student_bookmarks
+- daily_activity
+- student_search_history
+- imported QBank admin cache/content cache

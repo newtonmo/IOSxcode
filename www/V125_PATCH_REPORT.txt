@@ -1,0 +1,1 @@
+V125 patch: fixed navigation background/star repaint lag only. Disabled legacy body/html pseudo-star layers, kept one stable global star layer, and changed page navigation scroll reset from smooth to instant while suppressing screen entrance animation for 160ms during tab switch. No functional changes to Home, Streak, Videos, QBank, Profile, Supabase, or localStorage.

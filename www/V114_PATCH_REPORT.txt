@@ -1,0 +1,8 @@
+V114 patch:
+- Expanded Arabic help content for Home, Videos, and QBank.
+- Added help buttons to Videos guided path and QBank guided path.
+- Kept Profile without help buttons as requested.
+- Cleaned Home summary headers so only small blue labels remain.
+- Fixed To-do open/close pill text overlap.
+- Removed Videos search bar from the UI.
+- Updated cache/service worker to V114.

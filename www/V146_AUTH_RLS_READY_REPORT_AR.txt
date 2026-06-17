@@ -1,0 +1,53 @@
+NovaMed v146 - Auth/RLS ready patch
+
+الهدف:
+- إبقاء واجهة الطالب بسيطة: Student name + Simple code.
+- جعل الدخول داخلياً يعتمد على Supabase Auth حتى يمكن تشغيل RLS قوي يعتمد على auth.uid().
+- عدم تغيير وظائف التطبيق الأساسية: QBank, Videos, Flashcards, Profile, Streak, Study Plan, Admin local tools.
+
+ما الذي تغير:
+1) تمت إضافة ملف جديد:
+   simple-auth-rls-v146.js
+   هذا الملف يُحمّل بعد student-auth-cloud.js ويستبدل واجهة email/password بواجهة Name + Code، لكن داخلياً يستخدم Supabase Auth.
+
+2) طريقة الدخول الجديدة:
+   - الطالب يكتب الاسم والكود فقط.
+   - الكود يولّد email داخلي ثابت مبني على اسم الطالب.
+   - الكود يولّد password داخلي ثابت مبني على الاسم + الكود.
+   - Supabase Auth ينشئ/يفتح المستخدم.
+   - بعدها يتم حفظ التقدم في profiles / student_state / student_public حسب user_id = auth.uid().
+
+3) تم منع bypass الجلسة القديمة:
+   حتى إذا المتصفح محتفظ بجلسة، الكود يعيد التحقق من Name + Code عبر signInWithPassword.
+
+4) دعم migration من الجدول القديم:
+   إذا كان جدول student_profiles القديم لا يزال مفتوحاً قبل RLS، يحاول الكود قراءة progress القديم بنفس student_key/access_code_hash ثم ينقله إلى student_state.
+
+5) تمت إضافة SQL رئيسي:
+   SUPABASE_V146_STUDENT_AUTH_SCHEMA_AND_RLS.sql
+   هذا ينشئ/يصلح الجداول ويطبق RLS على الجداول الجديدة:
+   - profiles
+   - student_state
+   - student_public
+   ويطبق RLS قوي على بيانات الطالب.
+
+6) تمت إضافة SQL لقفل الجدول القديم بعد الهجرة:
+   SUPABASE_V146_LOCK_LEGACY_STUDENT_PROFILES_AFTER_MIGRATION.sql
+   شغله بعد ما تتأكد أن الطلاب القدامى دخلوا مرة واحدة وانتقلت بياناتهم.
+
+7) تمت إضافة SQL اختياري للإنتاج الكامل:
+   SUPABASE_V146_OPTIONAL_FULL_PRODUCTION_LOCKDOWN.sql
+   لا تشغله الآن إذا Admin ما زال local Name+Code، لأنه قد يوقف upload/edit content.
+
+8) تم تحديث index.html لتحميل simple-auth-rls-v146.js.
+9) تم تحديث service-worker.js إلى cache جديد v146 حتى لا يبقى الكاش القديم.
+
+قبل اختبار الدخول:
+ادخل Supabase Dashboard:
+Authentication > Providers > Email
+- Enable Email provider
+- Enable sign ups
+- Disable email confirmation
+
+مهم:
+لا تشغل optional full production lockdown إلا بعد تحويل Admin أيضاً إلى Supabase Auth.

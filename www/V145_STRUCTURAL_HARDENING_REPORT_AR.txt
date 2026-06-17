@@ -1,0 +1,57 @@
+NovaMed v145 - Structural Hardening Report
+
+تم تطبيق الإصلاحات المطلوبة بدون تغيير وظائف التطبيق الأساسية.
+
+1) حل تعارض الدوال global
+- تم إبقاء النسخة الحديثة/المناسبة من دوال QBank كنسخة رسمية واحدة:
+  renderQuestion
+  questionsFor
+  handleAnswer
+  handleQuestionTimeout
+  recordQbankAttempt
+  recordMistake
+  renderMistakes
+- تم تحويل النسخ القديمة داخل exam.js و ui.js إلى أسماء legacy حتى لا تعمل overwrite على النسخة الرسمية.
+- تم إبقاء openVideo من flashcards.js كنسخة نهائية لأنها تحتوي تنظيف الفيديو والفلاش كارد/الملاحظات، وتم تحويل openVideo القديم داخل videos.js و ui.js إلى أسماء legacy/base.
+- تمت إضافة stability-patch-v145.js كطبقة حماية أخيرة تثبّت الدوال الرسمية بعد تحميل كل السكربتات.
+
+2) إصلاح String IDs في QBank
+- تم إضافة qbankSameId/qbankFindQuestionById/qbankFindQuestionIndexById.
+- تم إزالة Number(id) من edit/delete/search الخاصة بأسئلة QBank.
+- صار تعديل/حذف/فتح أسئلة JSON ذات IDs نصية مثل med-cardio-arrhythmia-001 يعمل بشكل صحيح.
+
+3) حماية QBank loader
+- loadExternalQbankJson صار يستخدم in-flight guard حتى لا يشتغل مرتين بنفس الوقت.
+- إذا فشل تحميل data/qbank/index.json أو رجعت ملفات فارغة، لا يتم تصفير state.questions.
+- يتم الحفاظ على الأسئلة الموجودة بدل مسحها.
+
+4) تحسين recordMistake/handleAnswer
+- recordMistake يستدعي ensureStudyFeatureState عند توفرها.
+- الأخطاء الخاطئة تنشئ flashcards عند توفر makeFlashcardFromQuestion.
+- الإجابات تحدث analytics وflashcards عند توفر الدوال.
+- الإجابة الصحيحة تستطيع تحديث حالة السؤال الضعيف عبر markRecoveredIfKnown عند توفرها.
+
+5) منع تكرار boot sync
+- syncSimpleStudentProfileOnBoot صار guarded بواسطة window.__novamedProfileBootSyncPromiseV145.
+- إذا استدعي من profile.js ومن student-auth-cloud.js بنفس الوقت، لن يعمل مرتين.
+- تم منع تكرار setInterval الخاص بـ daily todo عند refreshAfterAccountChange.
+
+6) Supabase SDK fallback
+- تمت إضافة supabase-sdk-fallback-v145.js.
+- إذا فشل CDN الأساسي jsDelivr، يحاول تحميل Supabase SDK من unpkg قبل تحميل supabase.js.
+
+7) Supabase RLS production hardening
+- تمت إضافة SUPABASE_RLS_PRODUCTION_SAFE_V145.sql.
+- هذا ملف أمان للإنتاج مع Supabase Auth: المستخدم يقرأ/يكتب بياناته فقط، والـ anon يستطيع قراءة leaderboard/content المسموح فقط.
+- ملاحظة مهمة: نظام name+code القديم مع anon write لا يمكن تأمينه بالكامل في static frontend. للإنتاج استخدم Supabase Auth.
+
+8) Service Worker / cache
+- تم تحديث cache إلى novamed-mobile-v145-structural-hardening.
+- تمت إضافة الملفات الجديدة إلى assets cache.
+- تم جعل ملفات JS الحرجة تُجلب fresh-first لتقليل مشاكل الكاش القديم.
+
+الفحوصات المنفذة:
+- node --check لكل ملفات JS: OK
+- JSON parse لكل ملفات JSON: OK
+- فحص تحميل السكربتات بالتسلسل داخل VM stub: OK
+- فحص الدوال الحرجة global بعد الإصلاح: كل دالة حرجة لها تعريف رسمي واحد فقط.

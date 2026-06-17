@@ -1,0 +1,15 @@
+NovaMed v129 — Balanced Gold Light Polish
+
+Design-only changes. No JavaScript logic, Supabase, localStorage, navigation, data, or app behavior was changed.
+
+What changed:
+1. Reduced over-heavy Light Mode shadows globally so cards and buttons no longer cast into neighboring sections.
+2. Smoothed the Weekly Streak / League card shadow so the bottom no longer looks like a rectangular block.
+3. Converted important Light Mode CTAs to a calm premium gold accent:
+   - Free Courses
+   - Wizary mode
+   - MCQ mode picker where present
+4. Made Free Courses a compact centered pill on desktop/tablet instead of a long empty bar; it remains full-width on small phones.
+5. Removed the unnecessary Light Mode capsule/border around the NovaMed brand, leaving only the logo mark + name.
+6. Cleaned Streak action button hierarchy: Join is gold primary, Join weekly league is calm secondary, View rules is a quiet ghost.
+7. Kept all changes scoped to styling/CSS only.

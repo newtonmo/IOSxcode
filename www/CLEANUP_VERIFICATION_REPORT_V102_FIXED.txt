@@ -1,0 +1,13 @@
+V102 fixed verification notes
+
+Checked V101 vs V102 cleanup and applied safety fixes:
+1. Fixed Supabase sync modal recursion risk caused by duplicate renderSupabaseSyncModal declarations.
+2. Removed same-file duplicate effective Supabase status/modal function names by renaming legacy internal copies.
+3. Restored V102 Arabic My Mistakes UI as the final effective implementation, because exam.js loaded after qbank.js was overriding renderMistakes/mistakeTemplate.
+4. Updated Smart Review normalizer to preserve active/reviewed/mastered statuses instead of converting them back to old new/recovered states.
+5. Updated markRecoveredIfKnown so two correct reviews are required before mastered.
+6. Updated final renderProfileStats so the Arabic active mistakes count is not overridden by exam.js.
+7. Treated legacy recovered mistakes as mastered so old saved data is not counted as active again.
+8. Ran node --check for all JavaScript files after patch.
+
+No app data keys, localStorage keys, Supabase table names, or JSON schema were changed.

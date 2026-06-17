@@ -1,0 +1,6 @@
+تقرير v152:
+- إزالة مستطيل Supabase Connected من نافذة تسجيل الطالب عند الاتصال الناجح.
+- إزالة النص السفلي: Supabase Auth keeps only the login session... من تسجيل الدخول.
+- إزالة مستطيل No flashcards yet داخل نافذة Flashcards.
+- جعل نوافذ My Mistakes / Analytics / Flashcards / Bookmarks لا تأخذ ارتفاعاً ثابتاً كبيراً عند عدم وجود محتوى، حتى لا تظهر مساحة مستطيلة فارغة.
+- التعديل تصميمي فقط، بدون تغيير Supabase أو RLS أو localStorage أو منطق الحفظ.

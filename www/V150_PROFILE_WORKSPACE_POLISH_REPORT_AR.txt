@@ -1,0 +1,9 @@
+NovaMed v150 Profile Workspace Polish
+
+التعديلات:
+- إعادة تصميم نوافذ My Mistakes / Analytics / Flashcards / Bookmarks لتكون كروت Glass/Premium منسجمة مع التطبيق بدل مستطيلات مسطحة.
+- تحسين Light Mode لنوافذ البروفايل: خلفيات، حدود، ظلال، badges، وكروت متساوية.
+- تحسين Bookmarks وAnalytics وFlashcards system chooser وMistakes hierarchy بدون تغيير المنطق أو Supabase أو RLS.
+- تحديث cache version إلى novamed-v150-profile-workspace-polish.
+
+لا يحتاج SQL جديد.
