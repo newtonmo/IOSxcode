@@ -1,6 +1,6 @@
 workflows:
-  ios-capacitor-debug:
-    name: NovaMed iOS Capacitor Build
+  ios-capacitor-unsigned-ipa:
+    name: NovaMed iOS Unsigned IPA
     max_build_duration: 60
     instance_type: mac_mini_m2
 
@@ -20,17 +20,6 @@ workflows:
           npx cap add ios
           npx cap sync ios
 
-      - name: Check iOS files
-        script: |
-          echo "Root files:"
-          ls -la
-          echo "iOS folder:"
-          ls -la ios || true
-          echo "iOS App folder:"
-          ls -la ios/App || true
-          echo "Search Xcode files:"
-          find ios -maxdepth 4 -name "*.xcworkspace" -o -name "*.xcodeproj"
-
       - name: Install CocoaPods if available
         script: |
           cd ios/App
@@ -39,41 +28,44 @@ workflows:
           fi
           ls -la
 
-      - name: Build iOS Simulator App
+      - name: Build unsigned iPhone app
         script: |
           cd ios/App
 
           if [ -f "App.xcworkspace" ]; then
-            echo "Building using App.xcworkspace"
             xcodebuild \
               -workspace App.xcworkspace \
               -scheme App \
-              -configuration Debug \
-              -sdk iphonesimulator \
+              -configuration Release \
+              -sdk iphoneos \
+              -destination generic/platform=iOS \
               -derivedDataPath ../../build/ios \
               CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGN_IDENTITY="" \
               build
 
           elif [ -d "App.xcodeproj" ]; then
-            echo "Building using App.xcodeproj"
             xcodebuild \
               -project App.xcodeproj \
               -scheme App \
-              -configuration Debug \
-              -sdk iphonesimulator \
+              -configuration Release \
+              -sdk iphoneos \
+              -destination generic/platform=iOS \
               -derivedDataPath ../../build/ios \
               CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGN_IDENTITY="" \
               build
-
           else
-            echo "No App.xcworkspace or App.xcodeproj found"
+            echo "No Xcode project found"
             ls -la
             exit 1
           fi
 
-      - name: Zip simulator app
+      - name: Create unsigned IPA
         script: |
-          APP_PATH=$(find build/ios/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
+          APP_PATH=$(find build/ios/Build/Products/Release-iphoneos -name "*.app" -type d | head -n 1)
           echo "APP_PATH=$APP_PATH"
 
           if [ -z "$APP_PATH" ]; then
@@ -82,8 +74,10 @@ workflows:
             exit 1
           fi
 
-          zip -r NovaMed-iOS-Simulator.app.zip "$APP_PATH"
+          rm -rf Payload
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -r NovaMed-unsigned.ipa Payload
 
     artifacts:
-      - NovaMed-iOS-Simulator.app.zip
-      - build/ios/Build/Products/Debug-iphonesimulator/*.app
+      - NovaMed-unsigned.ipa
