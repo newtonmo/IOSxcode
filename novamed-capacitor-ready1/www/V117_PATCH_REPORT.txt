@@ -1,0 +1,28 @@
+V117 patch report
+
+Scope: Home layout only.
+
+Changes:
+- Home layout now defaults to only these cards enabled:
+  1. Monthly Calendar
+  2. Today To-do list
+  3. Course Planner
+- All other Home cards default to disabled:
+  Continue where you left off, Daily Question, Refresh, Smart Study Plan.
+- Added saved ordering for Home cards through Home layout settings.
+- Home layout modal now supports:
+  - Enable/disable each card.
+  - Drag rows to reorder cards.
+  - Use up/down buttons as a fallback reorder method.
+  - Default layout reset.
+- The order selected in Home layout is applied directly to the Home screen.
+- Course Planner Arabic help now explains that checked lectures are saved as studied/read, so students can distinguish completed lectures from lectures not read yet.
+
+Preserved:
+- No changes to Supabase tables, localStorage learning data, QBank JSON schema, Exam logic, Videos guide simplification, or QBank guide simplification.
+- Videos remains Course + Chapter only.
+- QBank remains MCQ mode + Course + Chapter only.
+
+Validation:
+- node --check passed for all JavaScript files.
+- Cache/service worker version updated to V117.

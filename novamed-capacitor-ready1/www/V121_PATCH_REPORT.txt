@@ -1,0 +1,15 @@
+V121 PATCH REPORT
+
+Scope: only clean the visible Videos/QBank guided path layout.
+
+Changes:
+- Videos guided path now visibly shows only Course + Chapter.
+- Removed visible placeholder words: Video type and Lecture.
+- Videos open button is Open.
+- QBank guided path now visibly shows only MCQ mode + Course + Chapter.
+- Removed visible placeholder words: Library and Lecture.
+- QBank open button is Open course.
+- Kept hidden internal selects in the DOM for compatibility with existing JavaScript/state.
+- Updated cache/service worker to V121.
+
+No changes to Home, Profile, Supabase, QBank data, or video data.

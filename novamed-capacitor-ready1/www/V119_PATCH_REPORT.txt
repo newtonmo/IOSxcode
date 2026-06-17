@@ -1,0 +1,9 @@
+V119 Patch Report
+
+- Removed the Profile hero/public preview card from the visible Profile page.
+- Removed the Simple sign in/Profile auth card from the visible Profile grid.
+- Fixed bottom navigation to use exactly 5 equal columns on mobile.
+- Removed the extra bottom-nav outer/back layer by disabling pseudo backdrops.
+- Centered nav icons/labels and removed the empty right-side gap.
+- Kept QBank, Videos, Home layout, Supabase, and localStorage behavior unchanged.
+- Updated cache busting/service worker to V119.

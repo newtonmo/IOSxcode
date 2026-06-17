@@ -1,0 +1,1 @@
+V112: polished Home cards, simplified Video/QBank guided paths to Course+Chapter, added chapter selection modals, fixed Profile tools to open as true modal, and closes My Mistakes modal before navigating to QBank.

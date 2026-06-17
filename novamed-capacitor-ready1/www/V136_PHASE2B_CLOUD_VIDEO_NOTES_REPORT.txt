@@ -1,0 +1,41 @@
+NovaMed v136 - Phase 2B Cloud Video Progress + Notes
+
+What changed:
+1. Video watch progress now syncs to Supabase table: video_progress.
+   - video_key
+   - current_time_seconds
+   - duration_seconds
+   - progress_percent
+   - completed
+   - last_watched_at
+
+2. Timestamp notes now sync to Supabase table: student_notes.
+   - source_type = video
+   - source_key = video id
+   - body = note text
+   - timestamp_seconds = video time
+
+3. When the student signs in, the app restores video progress and timestamp notes from Supabase.
+
+4. For signed-in students, novamed-feature-layer-v79 is no longer used for video notes/progress in localStorage.
+   The app keeps only in-memory UI cache during the session, while academic data is saved in Supabase.
+
+5. Cache version updated to:
+   novamed-v136-phase2b-cloud-video-notes
+
+Test checklist:
+- Sign in as a student.
+- Open a video and watch for 10+ seconds.
+- Pause or wait a few seconds.
+- Check Supabase Table Editor > video_progress.
+- Add a timestamp note.
+- Check Supabase Table Editor > student_notes.
+- Refresh the app and sign in again.
+- The video progress and note should restore.
+
+Still remaining for later phases:
+- QBank attempts -> qbank_attempts
+- Mistakes -> question_mistakes
+- Flashcards -> flashcard_progress
+- Bookmarks/search history -> student_bookmarks/student_search_history
+- Final removal/neutralizing of remaining localStorage academic keys

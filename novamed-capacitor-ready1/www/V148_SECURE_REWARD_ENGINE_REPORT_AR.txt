@@ -1,0 +1,27 @@
+NovaMed v148 - Secure Reward Engine
+
+تم تعديل النسخة v147 بحيث لا يقوم الفرونت إند بزيادة XP/Streak مباشرة.
+
+المبدأ الجديد:
+- إكمال الفيديو يستدعي Supabase RPC: award_student_xp('video_completed', ...)
+- جواب MCQ صحيح يستدعي: qbank_correct
+- جواب MCQ خطأ يستدعي: qbank_wrong
+- انتهاء وقت السؤال يستدعي: qbank_timeout
+- إنهاء امتحان يستدعي: exam_completed
+- مراجعة mistake تستدعي: mistake_reviewed
+- مراجعة flashcard تستدعي: flashcard_reviewed
+- إكمال route day يستدعي: route_day_completed
+- daily streak claim يستدعي: daily_streak_claim
+
+النتيجة:
+- Supabase هو الذي يحسب XP/Streak/Level.
+- reward_events يمنع تكرار نفس المكافأة لنفس event_key.
+- حفظ student_state صار لا يكتب total_xp/streak مباشرة، حتى يكون جاهز لقفل أعمدة XP لاحقاً.
+- تحديثات الواجهة والـ leaderboard تأخذ القيم الراجعة من RPC.
+
+ملفات SQL:
+1) SUPABASE_V148_REWARD_ENGINE_EXTENDED.sql
+   شغله أولاً قبل اختبار v148.
+
+2) SUPABASE_V148_OPTIONAL_LOCK_REWARD_COLUMNS_AFTER_TEST.sql
+   اختياري. لا تشغله إلا بعد رفع v148 واختبار أن XP يزيد من الفيديو/QBank/exam بشكل صحيح.

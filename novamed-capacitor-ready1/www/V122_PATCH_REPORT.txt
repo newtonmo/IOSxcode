@@ -1,0 +1,18 @@
+V122 PATCH REPORT
+
+Scope: QBank screen only.
+
+Changes:
+- Removed the QBank subtitle text under "Train like an exam.".
+- Removed the QBank search bar from the visible interface.
+- Added a second Guided Path inside QBank for High-yield notes.
+- High-yield notes path uses Course + Chapter only.
+- High-yield notes help (?) explains ministerial ideas, source-question patterns, exam tricks, and why this section matters.
+- Opening High-yield notes shows the chapter folders in the same modal-card style as QBank sets.
+- Selecting a folder opens a High-yield notes page in QBank, ready for later note content.
+- Kept QBank MCQ guide as Traditional-only and kept internal hidden fields only for compatibility.
+- No Home, Videos, Profile, Supabase, or student-data logic was changed.
+
+Checks:
+- node --check passed for all JavaScript files.
+- Cache/service-worker version updated to V122.

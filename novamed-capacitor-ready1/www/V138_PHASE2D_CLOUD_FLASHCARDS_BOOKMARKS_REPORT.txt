@@ -1,0 +1,29 @@
+NovaMed v138 - Phase 2D Cloud Flashcards + Bookmarks + Search History
+
+Scope completed:
+1) flashcard_progress
+   - Restores flashcards from Supabase after student login.
+   - Saves newly generated mistake flashcards to Supabase.
+   - Saves Easy / Hard / Again review actions to Supabase.
+   - Keeps flashcards in memory for the signed-in student rather than localStorage.
+
+2) student_bookmarks
+   - Restores video and question bookmarks from Supabase.
+   - Saves/removes lecture bookmarks in Supabase.
+   - Saves/removes MCQ bookmarks in Supabase.
+
+3) student_search_history
+   - Records global search queries for signed-in students in Supabase.
+   - Restores recent search history into the in-memory feature store.
+
+4) Cache/version bump
+   - Updated app cache version to v139-phase2e-final-cloud-only-cleanup.
+   - Updated service worker cache name to force Netlify/browser refresh.
+
+Tables used:
+- flashcard_progress
+- student_bookmarks
+- student_search_history
+
+Important:
+This phase does not remove admin/global content cache, imported QBank local cache, or home widget local settings. Those are left for Phase 2E final cleanup so student progress migration remains safe.

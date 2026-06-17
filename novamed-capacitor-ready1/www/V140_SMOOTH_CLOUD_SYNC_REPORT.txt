@@ -1,0 +1,48 @@
+NovaMed v140 Smooth Cloud Sync
+
+Base: v139 phase2e final cloud-only cleanup.
+Reference feel: v134 auth-students version.
+
+Goal:
+Make the current cloud-only version feel smoother and closer to the faster v134 experience while preserving all v139 cloud features.
+
+What changed:
+1. Kept all v139 Supabase features:
+   - Auth students
+   - Real student leaderboard
+   - student_state
+   - live_exams
+   - study_plans
+   - video_progress
+   - student_notes
+   - qbank_attempts
+   - question_mistakes
+   - flashcard_progress
+   - student_bookmarks
+   - student_search_history
+
+2. Reduced perceived delay:
+   - Sign-in/boot no longer waits for all heavy progress tables before showing the UI.
+   - Large restore tasks run in the background after the student account is available.
+   - UI refresh after cloud restore is batched into a single lightweight refresh pass.
+
+3. Reduced repeated rendering:
+   - Video/QBank/flashcards/bookmark restore no longer triggers multiple heavy re-renders while the cloud restore is still running.
+   - After restore completes, the relevant views refresh once.
+
+4. Reduced repeated Supabase writes:
+   - student_state/student_public saves are coalesced and debounced.
+   - Frequent progress updates are kept responsive and pushed to Supabase in the background.
+
+5. Smoothed leaderboard:
+   - The Street/Streak leaderboard uses a short cache so repeated navigations do not request Supabase every time.
+   - Current student XP updates the visible cache without forcing an immediate blocking refresh.
+
+6. UI performance hints:
+   - Added small CSS performance hints to preserve transitions and reduce repaint cost.
+   - Updated cache/service-worker version to v140 so Netlify browsers receive the new files.
+
+Notes:
+- Supabase Auth may still store its login session in the browser. This is expected and is not student academic progress.
+- Student academic progress remains in Supabase tables.
+- Test after deployment by hard-refreshing once or clearing the old service-worker cache if Netlify shows old assets.

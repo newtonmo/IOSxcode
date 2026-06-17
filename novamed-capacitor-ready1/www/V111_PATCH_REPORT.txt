@@ -1,0 +1,16 @@
+V111 Home cleanup patch
+
+Changes:
+- Home widget settings now use a new key (novamed-home-widget-settings-v111) so new/default installs start with all Home cards turned off.
+- Static Home widgets (Monthly Calendar, Today’s tasks, Your Course) are hidden in the initial HTML until the user enables them from Home layout.
+- Removed extra explanatory text from Home card headers, including Today’s tasks, Course Planner, and Smart Study Plan.
+- Added blue ? help buttons on Home cards. Help opens an Arabic bullet-point explanation modal.
+- Added help coverage for Continue, Daily Question, Refresh, Smart Study Plan, Monthly Calendar, Today’s tasks, and Course Planner.
+- Replaced Home layout reset action with Turn all off.
+- Updated cache busting and service worker cache to V111.
+
+Safety:
+- No Supabase table names changed.
+- No localStorage study data keys changed, except the Home widget visibility preference key to reset default visibility.
+- No QBank JSON schema changed.
+- JavaScript checked with node --check for all JS files.

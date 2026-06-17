@@ -1,0 +1,10 @@
+NovaMed v127 — Light Mode visual polish only
+
+Changed only styling/cache-busting:
+- Added stronger soft shadows and clearer glass borders for Light Mode cards/containers.
+- Improved Light Mode text contrast, especially cyan/blue labels such as HOME and WEEKLY STREAK LEAGUE.
+- Polished Streak Light Mode cup card readability.
+- Changed the Streak reset timer in Light Mode to a warm gold theme.
+- Added cache-busting version strings so deployed CSS updates refresh correctly.
+
+No app logic, Supabase, localStorage, data names, or existing functions were changed.
