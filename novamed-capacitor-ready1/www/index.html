@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="NovaMed" />
+  <title>NovaMed Study</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.png" type="image/png" sizes="512x512" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:image" content="assets/icon.png" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css?v=novamed-v152-profile-no-rectangles-auth-clean" />
+</head>
+<body>
+  <div class="nova-global-stars-v124" aria-hidden="true"></div>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <div class="brand-chip" aria-label="NovaMed app brand">
+        <img src="assets/logo-mark.png" alt="" />
+        <span>NovaMed</span>
+      </div>
+      <div class="top-actions compact-mobile-actions" aria-label="Top actions">
+        <button class="circle-btn theme-top-btn" id="themeBtn" aria-label="Toggle light or dark mode">☾</button>
+        <button class="circle-btn global-search-top" id="globalSearchBtn" aria-label="Search everything">⌕</button>
+        <button class="stat-pill flame top-streak-pill" aria-label="Current streak"><span>🔥</span><b id="streakMini">7</b></button>
+        <button class="circle-btn home-widgets-gear" id="homeWidgetSettingsBtn" aria-label="Home widgets settings">⚙</button>
+      </div>
+    </header>
+
+    <main class="screen-stack">
+      
+      <section class="screen active" id="screen-learn" data-screen="learn" aria-label="Learning path screen">
+        <div class="hero-card premium-card learn-hero-clean">
+          <div class="hero-copy">
+            <span class="eyebrow">Home</span>
+            <h1>Start with clarity.</h1>
+            <p>A quieter study space for lectures, QBank practice, notes, and steady progress.</p>
+          </div>
+          <div class="mascot-card bare-mascot" aria-label="Study mascot Nova">
+            <img src="assets/mascot.svg" alt="Nova study mascot" />
+            <div class="speech-bubble" id="novaSpeech">I’m with you through this year.</div>
+          </div>
+        </div>
+
+        <div class="calendar-card premium-card compact-habit-card exam-calendar-card learn-calendar-card clean-calendar-card">
+          <div class="section-head compact exam-calendar-head calendar-head-v115">
+            <div>
+              <div class="home-title-help-v115">
+                <span class="eyebrow">Monthly calendar</span>
+                <button class="home-help-btn-v111" type="button" data-home-help-v111="calendar" aria-label="Monthly calendar help">?</button>
+              </div>
+              <h2 id="examCalendarTitle">This month</h2>
+            </div>
+          </div>
+          <div class="exam-calendar" id="examCalendar"></div>
+        </div>
+
+        <details class="daily-todo-card premium-card clean-todo-card todo-dropdown" aria-label="To-do list">
+          <summary class="todo-head home-compact-summary-v115">
+            <div class="home-title-help-v115">
+              <span class="eyebrow">To-do list</span>
+              <button class="home-help-btn-v111" type="button" data-home-help-v111="todo" aria-label="To-do list help">?</button>
+            </div>
+            <div class="todo-summary-actions">
+              <div class="todo-progress-badge" aria-label="To-do completion">
+                <b id="todoProgressNumber">0%</b>
+              </div>
+              <span class="todo-open-pill">Open tasks</span>
+            </div>
+          </summary>
+
+          <div class="todo-dropdown-body">
+            <form class="todo-input-row" id="dailyTodoForm">
+              <input id="dailyTodoInput" type="text" maxlength="80" placeholder="Add one clear task, e.g. Finish Cardio murmurs" aria-label="Add a task for today" />
+              <button class="primary-btn small" type="submit">Add</button>
+            </form>
+
+            <div class="daily-todo-list" id="dailyTodoList" aria-live="polite"></div>
+
+            <div class="todo-footer">
+              <small id="dailyTodoSummary">No tasks yet.</small>
+              <button class="tiny-btn browse-lecture-btn" id="browseTodoLecture" type="button">Browse a lecture</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="your-course-dropdown">
+          <summary class="home-compact-summary-v115">
+            <div class="home-title-help-v115">
+              <span class="eyebrow">Course planner</span>
+              <button class="home-help-btn-v111" type="button" data-home-help-v111="coursePlanner" aria-label="Course planner help">?</button>
+            </div>
+            <div class="home-card-actions-v111">
+              <b>Open</b>
+            </div>
+          </summary>
+
+
+
+
+
+
+
+        <section class="learn-route-card premium-card" aria-label="Your course planner">
+          <div class="learn-route-head">
+            <div>
+              <span class="eyebrow">Your course</span>
+              <h2>Choose your course tasks.</h2>
+              <p>Select the course, chapter, and lectures you want to follow. Your checked lectures stay saved.</p>
+            </div>
+            <button class="soft-btn small" id="openRouteTodoHelp" type="button">Guide</button>
+          </div>
+
+          <div class="route-choice-row" id="learnRouteCourseChips" aria-label="Choose study route"></div>
+
+          <div class="route-selector-panel">
+            <label class="field-label picker-field">
+              <span>Course</span>
+              <button class="picker-button" id="learnRouteCourseBtn" type="button"></button>
+              <select id="learnRouteCourse" class="picker-native"></select>
+            </label>
+            <label class="field-label picker-field">
+              <span>Chapter</span>
+              <button class="picker-button" id="learnRouteChapterBtn" type="button"></button>
+              <select id="learnRouteChapter" class="picker-native" disabled></select>
+            </label>
+          </div>
+
+          <div class="chapter-focus-card" id="learnRouteChapterCard"></div>
+          <div class="lecture-task-list" id="learnRouteLectureList"></div>
+        </section>
+        </details>
+
+      </section>
+
+<section class="screen" id="screen-videos" data-screen="videos" aria-label="Videos screen">
+        <div class="page-title video-title-with-free">
+          <div>
+            <span class="eyebrow">Video academy</span>
+            <h1>Choose your lecture path.</h1>
+          </div>
+        </div>
+
+        <button class="free-courses-trigger quick-exam-trigger video-free-courses-hero-v105" id="openFreeCoursesBtn" type="button">🎁 Free Courses</button>
+
+
+        <details class="guided-path-dropdown video-guided-dropdown">
+          <summary class="guided-summary-v115">
+            <div>
+              <div class="home-title-help-v115">
+                <span class="eyebrow">Guided path</span>
+                <button class="home-help-btn-v111" type="button" data-home-help-v111="videos" aria-label="Videos help">?</button>
+              </div>
+              <h2>Choose videos step by step.</h2>
+            </div>
+            <div class="guided-summary-actions-v114">
+              <b>Open</b>
+            </div>
+          </summary>
+
+          <section class="guided-picker-card premium-card" id="videoGuidedPicker" aria-label="Video guided picker">
+            <div class="guided-picker-head">
+              <div>
+                <span class="eyebrow">Video path</span>
+                <h2>Choose your lecture.</h2>
+              </div>
+              <button class="soft-btn small" id="videoGuideReset" type="button">Reset</button>
+            </div>
+            <div class="guided-picker-grid">
+              <label class="field-label picker-field hidden-guide-field-v121">
+                <span>Video type</span>
+                <button class="picker-button" id="videoGuideModeBtn" type="button"></button>
+                <select id="videoGuideMode" class="picker-native">
+                  <option value="">Choose type</option>
+                </select>
+              </label>
+              <label class="field-label picker-field">
+                <span>Course</span>
+                <button class="picker-button" id="videoGuideCourseBtn" type="button"></button>
+                <select id="videoGuideCourse" class="picker-native" disabled>
+                  <option value="">Choose course</option>
+                </select>
+              </label>
+              <label class="field-label picker-field">
+                <span>Chapter</span>
+                <button class="picker-button" id="videoGuideTopicBtn" type="button"></button>
+                <select id="videoGuideTopic" class="picker-native" disabled>
+                  <option value="">Choose chapter</option>
+                </select>
+              </label>
+              <label class="field-label picker-field video-lecture-field hidden-guide-field-v121">
+                <span>Lecture</span>
+                <button class="picker-button" id="videoGuideLectureBtn" type="button"></button>
+                <select id="videoGuideLecture" class="picker-native" disabled>
+                  <option value="">Choose lecture</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary-btn small guided-open-btn" id="openGuidedVideo" type="button">Open</button>
+          </section>
+        </details>
+
+        <div class="video-breadcrumb" id="videoBreadcrumb" aria-label="Video library path"></div>
+        <div class="video-library-grid mode-grid" id="videoGrid"></div>
+      </section>
+
+      <section class="screen" id="screen-qbank" data-screen="qbank" aria-label="Question bank screen">
+        <div class="page-title qbank-title-with-quick">
+          <div>
+            <span class="eyebrow">Question bank</span>
+            <h1>Train like an exam.</h1>
+          </div>
+          <details class="guided-path-dropdown quick-exam-dropdown inline-quick-exam">
+            <summary>
+              <span class="quick-exam-trigger" id="quickExamTrigger">⚡ Wizary mode</span>
+            </summary>
+
+            <section class="rapid-exam-card premium-card" aria-label="Start rapid exam">
+              <div class="rapid-exam-icon">⚡</div>
+              <div class="rapid-exam-copy">
+                <span class="eyebrow">QBank rapid exam</span>
+                <h2>Start real exam</h2>
+                <p>Timed exam, mixed mode, flagging, hidden explanations, and a score report.</p>
+              </div>
+              <button class="primary-btn small" id="startRapidExamFromQbank" type="button">Start exam</button>
+            </section>
+          </details>
+        </div>
+
+
+        <details class="guided-path-dropdown qbank-guided-dropdown">
+          <summary class="guided-summary-v115">
+            <div>
+              <div class="home-title-help-v115">
+                <span class="eyebrow">Guided path</span>
+                <button class="home-help-btn-v111" type="button" data-home-help-v111="qbank" aria-label="QBank help">?</button>
+              </div>
+              <h2>QBank</h2>
+            </div>
+            <div class="guided-summary-actions-v114">
+              <b>Open</b>
+            </div>
+          </summary>
+
+          <section class="guided-picker-card premium-card" id="qbankGuidedPicker" aria-label="QBank guided picker">
+            <div class="guided-picker-head">
+              <div>
+                <span class="eyebrow">Question path</span>
+                <h2>Choose your set.</h2>
+              </div>
+              <button class="soft-btn small" id="qbankGuideReset" type="button">Reset</button>
+            </div>
+            <div class="guided-picker-grid qbank-guided-grid">
+              <label class="field-label picker-field">
+                <span>MCQ mode</span>
+                <button class="picker-button" id="qbankGuideAnswerModeBtn" type="button"></button>
+                <select id="qbankGuideAnswerMode" class="picker-native">
+                  <option value="exam">Wizary style</option>
+                  <option value="free">Traditional</option>
+                </select>
+              </label>
+              <label class="field-label picker-field hidden-guide-field-v121">
+                <span>Library</span>
+                <button class="picker-button" id="qbankGuideModeBtn" type="button"></button>
+                <select id="qbankGuideMode" class="picker-native">
+                  <option value="">Choose library</option>
+                </select>
+              </label>
+              <label class="field-label picker-field" id="qbankGuideLibraryWrap" hidden>
+                <span>Note type</span>
+                <button class="picker-button" id="qbankGuideLibraryBtn" type="button"></button>
+                <select id="qbankGuideLibrary" class="picker-native">
+                  <option value="">Choose note type</option>
+                </select>
+              </label>
+              <label class="field-label picker-field">
+                <span>Course</span>
+                <button class="picker-button" id="qbankGuideCourseBtn" type="button"></button>
+                <select id="qbankGuideCourse" class="picker-native" disabled>
+                  <option value="">Choose course</option>
+                </select>
+              </label>
+              <label class="field-label picker-field">
+                <span>Chapter</span>
+                <button class="picker-button" id="qbankGuideTopicBtn" type="button"></button>
+                <select id="qbankGuideTopic" class="picker-native" disabled>
+                  <option value="">Choose chapter</option>
+                </select>
+              </label>
+              <label class="field-label picker-field hidden-guide-field-v121">
+                <span>Lecture</span>
+                <button class="picker-button" id="qbankGuideSubtopicBtn" type="button"></button>
+                <select id="qbankGuideSubtopic" class="picker-native" disabled>
+                  <option value="">Choose lecture</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary-btn small guided-open-btn" id="openGuidedQbank" type="button">Open course</button>
+          </section>
+        </details>
+
+        <details class="guided-path-dropdown qbank-guided-dropdown high-yield-guided-dropdown-v122">
+          <summary class="guided-summary-v115">
+            <div>
+              <div class="home-title-help-v115">
+                <span class="eyebrow">Guided path</span>
+                <button class="home-help-btn-v111" type="button" data-home-help-v111="highYieldNotes" aria-label="High-yield notes help">?</button>
+              </div>
+              <h2>High-yield notes</h2>
+            </div>
+            <div class="guided-summary-actions-v114">
+              <b>Open</b>
+            </div>
+          </summary>
+
+          <section class="guided-picker-card premium-card" id="highYieldGuidedPickerV122" aria-label="High-yield notes guided picker">
+            <div class="guided-picker-head">
+              <div>
+                <span class="eyebrow">High-yield notes</span>
+                <h2>Course and chapter</h2>
+              </div>
+              <button class="soft-btn small" id="highYieldGuideResetV122" type="button">Reset</button>
+            </div>
+            <div class="guided-picker-grid high-yield-guided-grid-v122">
+              <label class="field-label picker-field">
+                <span>Course</span>
+                <button class="picker-button" id="highYieldGuideCourseBtnV122" type="button"></button>
+                <select id="highYieldGuideCourseV122" class="picker-native">
+                  <option value="">Choose course</option>
+                </select>
+              </label>
+              <label class="field-label picker-field">
+                <span>Chapter</span>
+                <button class="picker-button" id="highYieldGuideTopicBtnV122" type="button"></button>
+                <select id="highYieldGuideTopicV122" class="picker-native" disabled>
+                  <option value="">Choose chapter</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary-btn small guided-open-btn" id="openGuidedHighYieldV122" type="button">Open</button>
+          </section>
+        </details>
+
+        <div class="qbank-json-tools admin-only" hidden>
+          <button class="soft-btn small" id="importQbankJsonBtn" type="button">Import QBank JSON</button>
+          <button class="soft-btn small" id="exportQbankJsonBtn" type="button">Export JSON</button>
+          <button class="soft-btn small" id="reloadQbankJsonBtn" type="button">Reload QBank folder</button>
+          <a class="soft-btn small" href="data/qbank-schema-guide.json" download>JSON guide</a>
+          <input id="qbankJsonFileInput" type="file" accept="application/json,.json" hidden />
+        </div>
+
+        <div class="qbank-breadcrumb video-breadcrumb" id="qbankBreadcrumb" aria-label="Question bank path"></div>
+        <div class="qbank-library-grid mode-grid" id="qbankGrid"></div>
+      </section>
+
+      <section class="screen" id="screen-streak" data-screen="streak" aria-label="Streak route screen">
+        <section class="streak-arena-card" aria-label="Weekly streak league">
+          <div class="streak-arena-stars" aria-hidden="true"></div>
+          <div class="streak-reset-badge" aria-label="League reset timer">
+            <span class="streak-clock" aria-hidden="true">
+              <svg viewBox="0 0 48 48" focusable="false">
+                <circle cx="24" cy="24" r="18"></circle>
+                <path d="M24 13v12l8 5"></path>
+              </svg>
+            </span>
+            <div><b>3d 14h</b><small>UNTIL RESET</small></div>
+          </div>
+
+          <header class="streak-arena-header">
+            <span class="streak-arena-eyebrow">WEEKLY STREAK LEAGUE</span>
+            <h1>Compete for the cup</h1>
+            <p>XP comes from videos, QBank, mistake review, and completing the weekly route. Top ranks receive weekly rewards.</p>
+          </header>
+
+          <div class="streak-cup-road" aria-label="Cup progression">
+            <article class="streak-cup-card bronze passed">
+              <span class="streak-cup-shine" aria-hidden="true"></span>
+              <span class="streak-trophy" aria-hidden="true">🏆</span>
+              <b>Bronze</b>
+              <small>Passed</small>
+            </article>
+            <article class="streak-cup-card silver passed">
+              <span class="streak-cup-shine" aria-hidden="true"></span>
+              <span class="streak-trophy" aria-hidden="true">🏆</span>
+              <b>Silver</b>
+              <small>Passed</small>
+            </article>
+            <article class="streak-cup-card gold active" aria-current="step">
+              <span class="streak-cup-shine" aria-hidden="true"></span>
+              <span class="streak-trophy" aria-hidden="true">🏆</span>
+              <b>Gold</b>
+              <small>Current cup</small>
+              <em>ACTIVE</em>
+            </article>
+            <article class="streak-cup-card diamond locked">
+              <span class="streak-chain chain-left" aria-hidden="true"></span>
+              <span class="streak-chain chain-right" aria-hidden="true"></span>
+              <span class="streak-lock" aria-hidden="true">🔒</span>
+              <span class="streak-diamond" aria-hidden="true">💎</span>
+              <b>Diamond</b>
+              <small>Locked</small>
+            </article>
+          </div>
+
+          <div class="streak-leaderboard" aria-label="Weekly leaderboard">
+            <article class="streak-player-row empty real-students-only">
+              <span class="streak-rank-badge plain"><span class="streak-avatar">N</span><i>•</i></span>
+              <div><b>No fake names</b><small>Sign in to load registered students from Supabase.</small></div>
+              <strong>0 XP</strong>
+              <em>Real students only</em>
+            </article>
+          </div>
+
+          <div class="streak-reward-ribbon">
+            <span aria-hidden="true">🎁</span>
+            <p><b>Reward can change weekly.</b> Admin can set discounts, free sessions, unlocked courses, badges, or any prize for ranks 1–3.</p>
+            <i aria-hidden="true"></i>
+          </div>
+
+          <div class="streak-arena-actions">
+            <button class="streak-action-btn secondary" data-league-action="join" type="button">Join weekly league</button>
+            <button class="streak-action-btn ghost" data-league-action="rules" type="button">View rules</button>
+            <button class="streak-action-btn join" data-league-action="join" type="button">Join</button>
+          </div>
+        </section>
+      </section>
+
+      
+      <section class="screen" id="screen-partner" data-screen="partner" aria-label="Study partner screen">
+        <div class="page-title center partner-coming-title">
+          <span class="eyebrow">Study partner</span>
+          <h1>Coming soon.</h1>
+          <p>A clean space for future shared study room.</p>
+        </div>
+
+        <div class="partner-coming-soon premium-card">
+          <div class="partner-coming-badge">COMING SOON</div>
+          <div class="partner-coming-orb" aria-hidden="true">
+            <span>🤝</span>
+          </div>
+          <div>
+            <span class="eyebrow">Future feature</span>
+            <h2>Clean space for future shared study room</h2>
+            <p>This area is reserved for shared study rooms, focus sessions, partner challenges, and study accountability tools in a future update.</p>
+          </div>
+        </div>
+
+        <div class="partner-roadmap premium-card partner-roadmap-coming">
+          <div class="section-head compact">
+            <h2>Suggested future features</h2>
+            <span class="coming-pill">Coming soon</span>
+          </div>
+          <div class="roadmap-list">
+            <label><input type="checkbox" checked disabled /> <span>Shared study room</span><b>Planned</b></label>
+            <label><input type="checkbox" checked disabled /> <span>Focus timer with partner</span><b>Planned</b></label>
+            <label><input type="checkbox" disabled /> <span>Watch lecture together</span><b>Future</b></label>
+            <label><input type="checkbox" disabled /> <span>Partner accountability check-in</span><b>Future</b></label>
+          </div>
+        </div>
+      </section>
+
+<section class="screen" id="screen-profile" data-screen="profile" aria-label="Profile and admin screen">
+        <div class="profile-card premium-card" hidden>
+          <img src="assets/mascot.svg" alt="Nova avatar" />
+          <div>
+            <span class="eyebrow" id="profileMode">Student profile</span>
+            <h1 id="profileName">Create your profile</h1>
+            <p id="profileStatsLine">Level 12 • 1,280 XP • Doctor mode</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <button class="settings-card premium-card auth-card" id="profileAuthBtn" type="button"><span>🔐</span><b id="profileAuthTitle">Account access</b><small id="profileAuthSubtitle">Connect your account and restore progress.</small></button>
+          <button class="settings-card premium-card sync-card admin-only" id="profileSyncBtn" type="button"><span>🔄</span><b>Sync</b><small id="profileSyncStatus">Not synced</small></button>
+          <button class="settings-card premium-card admin-only" id="cloudSetupProfileBtn" type="button"><span>☁️</span><b>Cloud Setup</b><small id="cloudStatusBadge">Local mode</small></button>
+          <button class="settings-card premium-card" data-admin-tab="mistakes"><span>🧩</span><b>My Mistakes</b><small>Smart review for wrong answers</small></button>
+          <button class="settings-card premium-card" data-admin-tab="analytics"><span>📈</span><b>Analytics</b><small>Progress and weak points</small></button>
+          <button class="settings-card premium-card" data-admin-tab="flashcards"><span>🃏</span><b>Flashcards</b><small>Generated from wrong answers</small></button>
+          <button class="settings-card premium-card" data-admin-tab="bookmarks"><span>🔖</span><b>Bookmarks</b><small>Saved lectures and MCQs</small></button>
+          <button class="settings-card premium-card admin-only" data-admin-tab="adminDashboard"><span>📊</span><b>Admin dashboard</b><small>Students, views, and weak MCQs</small></button>
+          <button class="settings-card premium-card" id="partnerComingSoonProfileBtn" type="button"><span>🤝</span><b>Study Partner</b><small>Coming soon inside Profile</small></button>
+        </div>
+
+        <div class="admin-panel premium-card" id="adminPanel">
+          <div class="admin-tab active" id="mistakes">
+            <div class="mistakes-head">
+              <div>
+                <span class="eyebrow">Review Center</span>
+                <h2>My Mistakes</h2>
+                <p>Mistakes are grouped by course, system, and lecture so you can review only the questions you missed.</p>
+              </div>
+              <button class="soft-btn small" id="clearReviewedMistakes" type="button">Refresh list</button>
+            </div>
+            <div class="mistake-stats-grid" id="mistakeStatsGrid"></div>
+            <div class="mistakes-list" id="mistakesList"></div>
+          </div>
+
+          <div class="admin-tab" id="analytics">
+            <div class="analytics-smart-dashboard" id="analyticsDashboard"></div>
+          </div>
+
+          <div class="admin-tab" id="flashcards">
+            <div class="flashcards-smart-panel" id="flashcardsPanel"></div>
+          </div>
+
+          <div class="admin-tab" id="bookmarks">
+            <div class="bookmarks-panel" id="bookmarksPanel"></div>
+          </div>
+
+          <div class="admin-tab admin-only" id="adminDashboard">
+            <div class="admin-dashboard-panel" id="adminDashboardPanel"></div>
+          </div>
+
+          <div class="admin-tab" id="settings">
+            <h2>App settings</h2>
+            <div class="settings-list">
+              <label><span>Daily reminder</span><input type="checkbox" checked /></label>
+              <label><span>Sound effects</span><input type="checkbox" checked /></label>
+              <label><span>Compact iPad mode</span><input type="checkbox" /></label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-nav="learn" aria-label="Home"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8"/><path d="M6.5 9.8V20h11V9.8"/><path d="M10 20v-5h4v5"/></svg></span><b>Home</b></button>
+      <button class="nav-item" data-nav="streak" aria-label="Streak"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 6.8 12.2h4.5L10 21l7.2-10.6h-4.7L13 3Z"/></svg></span><b>Streak</b></button>
+      <button class="nav-item" data-nav="videos" aria-label="Videos"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg></span><b>Videos</b></button>
+      <button class="nav-item" data-nav="qbank" aria-label="Question Bank"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.3 9a3 3 0 1 1 4.6 2.5c-1.2.8-1.9 1.4-1.9 2.7"/><path d="M12 18h.01"/><circle cx="12" cy="12" r="9"/></svg></span><b>QBank</b></button>
+      <button class="nav-item" data-nav="profile" aria-label="Profile"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><b>Profile</b></button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-btn" id="closeModal" aria-label="Close modal">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="supabase-config.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-sdk-fallback-v145.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="supabase.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="profile.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="videos.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="qbank.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="exam.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="ui.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="flashcards.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="study-plan.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="student-auth-cloud.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="app.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+  <script src="stability-patch-v145.js?v=novamed-v152-profile-no-rectangles-auth-clean"></script>
+</body>
+</html>

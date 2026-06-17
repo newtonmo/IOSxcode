@@ -1,0 +1,37 @@
+NovaMed Cloud Profile Restore Fix
+
+This build fixes the issue where a second browser/device said "account created" instead of importing an existing student profile from Supabase.
+
+Important changes:
+- Student sign-in no longer silently creates a local-only account when Supabase is unavailable.
+- The app requires Supabase to be readable before opening a student account.
+- It fetches public.student_profiles by student_key before creating/upserting.
+- If Supabase blocks the request, the UI now shows a clear setup/RLS/table error.
+- The service worker no longer pre-caches supabase-config.js, preventing an old empty config from being reused.
+
+Correct deployment setup:
+1. Run SUPABASE_SETUP.sql in Supabase SQL Editor.
+2. Put your Project URL and anon public key in supabase-config.js before publishing:
+   window.NOVAMED_SUPABASE_CONFIG = {
+     url: 'https://YOUR_PROJECT_REF.supabase.co',
+     anonKey: 'YOUR_ANON_PUBLIC_KEY',
+     bucket: 'novamed',
+     videoFolder: 'focus video',
+     fileFolder: 'novamed-files'
+   };
+
+Why this matters:
+Saving Supabase details from the in-app Cloud Setup stores them in that browser's localStorage only.
+A second device cannot see those values. For multi-device sync, embed the public Project URL and anon key in supabase-config.js before deployment, or configure Cloud Setup on every test device.
+
+Student profile sync includes:
+- XP/streak
+- per-video percent/currentTime/duration/completed
+- MCQ attempts and stats
+- mistakes and notes
+- daily to-do
+- study route plan
+- exam/calendar targets
+- current navigation paths
+
+After deploying this update, hard refresh or clear the old PWA/cache if the browser still opens the old build.

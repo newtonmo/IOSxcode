@@ -1,0 +1,8 @@
+{
+  "files": [
+    "data/qbank/medicine/Cardio/arrhythmia.json",
+    "data/qbank/medicine/Cardio/congenital-heart-diseases.json",
+    "data/qbank/medicine/Cardio/modern-explanation-demo.json",
+    "data/qbank/medicine/Respiratory/asthma.json"
+  ]
+}

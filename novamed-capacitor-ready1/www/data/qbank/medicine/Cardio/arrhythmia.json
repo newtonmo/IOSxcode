@@ -1,0 +1,66 @@
+{
+  "course": "medicine",
+  "topic": "Cardio",
+  "lecture": "Arrhythmia",
+  "questions": [
+    {
+      "id": "med-cardio-arrhythmia-001",
+      "stem": "Which ECG finding most strongly suggests atrial fibrillation?",
+      "options": [
+        "Regular rhythm with visible P waves before every QRS",
+        "Irregularly irregular rhythm without clear P waves",
+        "ST elevation in contiguous leads only",
+        "Short PR interval with a delta wave",
+        "Tall peaked T waves diffusely"
+      ],
+      "correct": 1,
+      "explanation": "Atrial fibrillation is caused by disorganized atrial activity, so the ECG classically shows no consistent P waves and an irregularly irregular ventricular rhythm.",
+      "wrong": [
+        "Regular rhythm with P waves suggests sinus rhythm, not atrial fibrillation.",
+        "ST elevation in contiguous leads suggests acute myocardial infarction rather than atrial fibrillation.",
+        "Short PR with a delta wave suggests Wolff-Parkinson-White pattern.",
+        "Tall peaked T waves suggest hyperkalemia."
+      ],
+      "takeaway": "AF = irregularly irregular rhythm + absent organized P waves.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "med-cardio-arrhythmia-002",
+      "stem": "A narrow-complex tachycardia that terminates after carotid sinus massage is most consistent with which mechanism?",
+      "options": [
+        "Ventricular fibrillation",
+        "AV nodal re-entry tachycardia",
+        "Complete heart block",
+        "Atrial flutter with fixed block"
+      ],
+      "correct": 1,
+      "explanation": "AVNRT is an AV-node dependent supraventricular tachycardia. Vagal maneuvers may increase AV nodal refractoriness and terminate the rhythm.",
+      "wrong": [
+        "Ventricular fibrillation is chaotic, pulseless, and not terminated by carotid massage.",
+        "Complete heart block causes bradycardia rather than narrow-complex tachycardia.",
+        "Atrial flutter may slow with AV nodal blockade but usually does not terminate with carotid massage."
+      ],
+      "takeaway": "Regular narrow tachycardia stopped by vagal maneuver = AVNRT.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "med-cardio-arrhythmia-003",
+      "stem": "Which rhythm is most likely when an ECG shows progressive PR prolongation followed by a dropped QRS complex?",
+      "options": [
+        "Mobitz type I AV block",
+        "Mobitz type II AV block",
+        "Third-degree AV block",
+        "Sinus arrest"
+      ],
+      "correct": 0,
+      "explanation": "Mobitz type I, or Wenckebach, shows progressive PR interval lengthening until a QRS complex is dropped.",
+      "wrong": [
+        "Mobitz type II has fixed PR intervals before dropped QRS complexes.",
+        "Third-degree AV block has complete AV dissociation.",
+        "Sinus arrest is a pause due to failure of sinus node impulse formation."
+      ],
+      "takeaway": "Progressive PR prolongation then drop = Mobitz I/Wenckebach.",
+      "difficulty": "easy"
+    }
+  ]
+}

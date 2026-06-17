@@ -1,0 +1,34 @@
+NovaMed QBank JSON Workflow (v87)
+
+Permanent QBank import:
+1. Put each lecture JSON file inside: data/qbank/<course>/<system>/<lecture-file>.json
+   Example: data/qbank/medicine/Cardio/arrhythmia.json
+2. Run: node generate-qbank-index.js
+3. Deploy / open the app. The lecture will appear in QBank, Quick Exam, and Exam Mode.
+
+Important:
+- Do not create a folder for each lecture. Each lecture is one JSON file.
+- data/qbank/index.json is the only file list read by the app.
+- Browser Admin Import is local only for testing on static hosting. It cannot write server files on Netlify/GitHub Pages.
+
+Supported JSON shape:
+{
+  "course": "medicine",
+  "topic": "Cardio",
+  "lecture": "Arrhythmia",
+  "questions": [
+    {
+      "id": "med-cardio-arrhythmia-001",
+      "stem": "Question text",
+      "options": ["A", "B", "C", "D", "E"],
+      "correct": 2,
+      "explanation": "Main explanation",
+      "wrong": ["Why A wrong", "Why B wrong", "Why D wrong", "Why E wrong"],
+      "takeaway": "High-yield point",
+      "difficulty": "medium"
+    }
+  ]
+}
+
+Alternative supported field:
+"optionExplanations": ["Why A", "Why B", "Why C correct", "Why D"]
