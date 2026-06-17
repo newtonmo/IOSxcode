@@ -1,0 +1,42 @@
+workflows:
+  ios-capacitor-debug:
+    name: NovaMed iOS Capacitor Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      node: latest
+      xcode: latest
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+          npm install @capacitor/ios
+
+      - name: Add iOS platform
+        script: |
+          npx cap add ios
+
+      - name: Sync Capacitor iOS
+        script: |
+          npx cap sync ios
+
+      - name: Build iOS Simulator App
+        script: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -derivedDataPath build/ios \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Zip simulator app
+        script: |
+          APP_PATH=$(find build/ios/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
+          zip -r NovaMed-iOS-Simulator.app.zip "$APP_PATH"
+
+    artifacts:
+      - NovaMed-iOS-Simulator.app.zip
